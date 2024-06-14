@@ -15,5 +15,5 @@ const userSchema = new mongooes.Schema({
   },
 });
 
-const User = mongooes.model.User || mongooes.model("User", userSchema);
+const User = mongooes.models.User || mongooes.model("User", userSchema);
 export default User;
