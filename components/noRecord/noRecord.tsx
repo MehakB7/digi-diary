@@ -9,8 +9,8 @@ const NoRecord = () => {
     <>
     <Image src={diary.src} alt="diary" width={300} height={300} />
     <div className='flex flex-col items-center justify-center gap-y-4'>
-        <h1 className='text-3xl font-bold text-primary-foreground'>{title}</h1>
-        <p className='text-lg text-primary-foreground'>{description}</p>
+        <h1 className='text-3xl font-bold'>{title}</h1>
+        <p className='text-lg'>{description}</p>
     </div>
     </>
   )
