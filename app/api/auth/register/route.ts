@@ -19,9 +19,11 @@ export async function  POST(request: NextRequest) {
             email,
             password: hashedPassword
         }).save();
+
+        const {password:p, ...rest}  = savedUser;
         
         console.log("saved user", savedUser);
-        return NextResponse.json({message: "User created", user: savedUser}, {status: 201});
+        return NextResponse.json({message: "User created", user: rest}, {status: 201});
 
 
     }catch(e){
