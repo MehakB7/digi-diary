@@ -1,5 +1,11 @@
 import Signup from "@/components/signup/signup";
+import Link from "next/link";
 import React from "react";
+
+export const Metadata ={
+  title: "Register",
+  description: "Register for an account",
+}
 
 function Page() {
   return (
@@ -10,7 +16,7 @@ function Page() {
           Create an account
         </h1>
         <p className="text-sm text-muted-foreground">
-          Enter your email below to create your account
+         Already have and account? <Link href="/login" className="text-primary">Login</Link>
         </p>
       </div>
       <Signup />
