@@ -16,6 +16,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FromFields } from "./fromfield";
 import { FormFieldType } from "./type";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -27,18 +28,21 @@ const Signup = () => {
     },
   });
 
+  const router = useRouter();
   const onSubmit = async (data: z.infer<typeof signupSchema>) => {
-      console.log(data);
-      try{
-        const response = await fetch("/api/auth/register",{method:"POST",body:JSON.stringify(data)});
-        const result = await response.json();
-         if(!response.ok){
-            throw new Error(result.message);
-         }
-        }
-        catch(e){
-            console.log("error", e);
-        }
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message);
+      }
+      router.push("/login");
+    } catch (e) {
+      console.log("error", e);
+    }
   };
 
   return (
@@ -61,7 +65,9 @@ const Signup = () => {
           />
         ))}
 
-        <Button type="submit" className="self-center">Submit</Button>
+        <Button type="submit" className="self-center">
+          Submit
+        </Button>
       </form>
     </Form>
   );
