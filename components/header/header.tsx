@@ -8,9 +8,15 @@ function Header() {
   const session = useSession();
   return (
     <div className="flex flex-row-reverse w-full p-4 absolute ">
-      <Button asChild>
-        <Link href="/login">Login</Link>
-      </Button>
+      {!session?.data?.user ? (
+        <Button asChild>
+          <Link href="/login">Login</Link>
+        </Button>
+      ) : (
+        <>
+          <span className="font-mono">Hey, {session.data?.user.name}</span>
+        </>
+      )}
     </div>
   );
 }
