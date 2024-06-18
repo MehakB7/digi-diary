@@ -18,6 +18,7 @@ import { FromFields } from "./formFields";
 import { FormFieldType } from "./types";
 import { signIn } from "next-auth/react";
 import { AlertDestructive } from "@/components/ui/alert";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
   const form = useForm<z.infer<typeof SigninScheme>>({
@@ -31,6 +32,8 @@ const SignIn = () => {
   const [error, setError] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
 
+  const router = useRouter();
+
   const onSubmit = async (data: z.infer<typeof SigninScheme>) => {
     try {
       setLoading(true);
@@ -41,7 +44,9 @@ const SignIn = () => {
 
       if (result?.error && result?.error === "CredentialsSignin") {
         setError("Invalid email or password");
+        return;
       }
+      router.push("/");
     } catch (e) {
       setError("Something went wrong");
     } finally {
